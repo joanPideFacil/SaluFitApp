@@ -1,0 +1,17 @@
+﻿@model SaluFitApp.Web.Domain.Entities.Patient
+@{
+    ViewData["Title"] = "Editar Paciente";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    @* incluir el Id oculto para que MVC lo reciba *@
+    <input type="hidden" asp-for="Id" />
+    @await Html.PartialAsync("_PatientForm", Model)
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

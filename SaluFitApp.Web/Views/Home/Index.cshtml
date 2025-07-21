@@ -1,0 +1,55 @@
+﻿@model SaluFitApp.Web.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Panel de control";
+}
+
+<div class="container-fluid py-4">
+    <h1>@ViewData["Title"]</h1>
+
+    <!-- KPI cards -->
+    <div class="row mb-5">
+        <div class="col-md-3 mb-3">
+            <div class="card border">
+                <div class="card-body">
+                    <h5 class="card-title">Citas hoy</h5>
+                    <p class="display-4">@Model.TodayAppointments</p>
+                    <a asp-controller="Appointments" asp-action="Index" class="stretched-link">Ver</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border">
+                <div class="card-body">
+                    <h5 class="card-title">Pacientes activos</h5>
+                    <p class="display-4">@Model.ActivePatients</p>
+                    <a asp-controller="Patients" asp-action="Index" class="stretched-link">Ver</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border">
+                <div class="card-body">
+                    <h5 class="card-title">Pacientes inactivos</h5>
+                    <p class="display-4">@Model.InactivePatients</p>
+                    <a asp-controller="Patients" asp-action="Index" class="stretched-link">Ver</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border">
+                <div class="card-body">
+                    <h5 class="card-title">Notificaciones</h5>
+                    <p class="display-4">@Model.NotificationsCount</p>
+                    <a asp-action="Index" class="stretched-link">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Próximas citas -->
+    <h2>Próximas citas</h2>
+    <table class="table table-striped mb-5">
+        <thead>
+            <tr>
+                <th>Paciente
