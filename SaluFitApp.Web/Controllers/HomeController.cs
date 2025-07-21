@@ -19,7 +19,9 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var vm = new DashboardViewModel();
-        // … rellenar vm
+        vm.ActivePatients = 1;
+        vm.InactivePatients = 1;
+        vm.TodayAppointments = 3;
         return View(vm);
     }
 }
