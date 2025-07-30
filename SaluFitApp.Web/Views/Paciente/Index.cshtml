@@ -1,0 +1,108 @@
+﻿@model IEnumerable<SaluFitApp.Web.Domain.Entities.Patient>
+
+@{
+    ViewData["Title"] = "Paciente";
+    // var searchTerm = HttpContext.Request.Query["search"].ToString();
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Pacientes</h1>
+        <a asp-action="Create" class="btn btn-Anadir rounded-5 ">Nuevo paciente +</a>
+    </div>
+
+    <div class="mb-4 ">
+        <div class="input-group rounded-5 form-control bg-gris d-flex flex-wrap">
+            <span class="me-2">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.6642 11.8359L9.51416 8.69175C10.1541 7.87652 10.5013 6.8698 10.5 5.83342C10.5 4.91044 10.2263 4.00819 9.71352 3.24076C9.20074 2.47333 8.4719 1.87519 7.61918 1.52198C6.76646 1.16877 5.82815 1.07635 4.9229 1.25642C4.01766 1.43648 3.18614 1.88094 2.53349 2.53359C1.88085 3.18623 1.43639 4.01775 1.25633 4.923C1.07626 5.82824 1.16868 6.76655 1.52189 7.61927C1.8751 8.472 2.47323 9.20083 3.24066 9.71361C4.00809 10.2264 4.91035 10.5001 5.83333 10.5001C6.86971 10.5014 7.87642 10.1542 8.69166 9.51425L11.8358 12.6643C11.8901 12.7189 11.9546 12.7623 12.0257 12.7919C12.0967 12.8216 12.173 12.8368 12.25 12.8368C12.327 12.8368 12.4032 12.8216 12.4743 12.7919C12.5454 12.7623 12.6099 12.7189 12.6642 12.6643C12.7188 12.61 12.7622 12.5455 12.7918 12.4744C12.8215 12.4033 12.8367 12.3271 12.8367 12.2501C12.8367 12.1731 12.8215 12.0968 12.7918 12.0257C12.7622 11.9547 12.7188 11.8901 12.6642 11.8359ZM2.33333 5.83342C2.33333 5.14118 2.5386 4.46449 2.92318 3.88892C3.30777 3.31335 3.85439 2.86475 4.49393 2.59984C5.13348 2.33493 5.83721 2.26562 6.51614 2.40067C7.19508 2.53572 7.81872 2.86906 8.3082 3.35854C8.79768 3.84803 9.13103 4.47167 9.26607 5.1506C9.40112 5.82953 9.33181 6.53327 9.0669 7.17281C8.802 7.81235 8.35339 8.35898 7.77782 8.74356C7.20225 9.12815 6.52556 9.33342 5.83333 9.33342C4.90507 9.33342 4.01483 8.96467 3.35845 8.30829C2.70207 7.65191 2.33333 6.76167 2.33333 5.83342Z" fill="#A3A3A3" />
+                </svg>
+            </span>
+            <input type="text" name="search" class="input-buscar" placeholder="Buscar paciente" />
+        </div>
+    </div>
+  
+    <div class="filtro-container">
+        <select class="filtro-select form-select text-center">
+            <option  selected>Estado</option>
+            <option>Activo</option>
+            <option>Inactivo</option>
+        </select>
+
+        <select class="filtro-select form-select text-center">
+            <option  selected>Ordenar</option>
+            <option>Por nombre</option>
+            <option>Por fecha</option>
+        </select>
+
+        <select class="filtro-select form-select text-center">
+            <option selected>Ejercicios</option>
+            <option>Asignados</option>
+            <option>No asignados</option>
+        </select>
+    </div>
+
+
+
+    <table id="tablaPacientes" class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Foto</th>
+                    <th>Última cita</th>
+                    <th>Razón consulta</th>
+                    <th>Ejercicios</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            No se han encontrado pacientes.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var p in Model)
+                    {
+                    <tr data-href="@Url.Action("Edit", new { id = p.Id })"
+                        style="cursor: pointer;">
+                            <td >@p.Nombre</td>
+                        <td><img width="40" height="40" class="rounded-5" src="~/img/imagen-ejemplo.jpg" /></td>
+                            <td>@p.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                            <td>Mucho dolor perianal</td>
+                            <td>3 Ejercicios</td>
+                            <td>Rotura</td>
+                        @* <td>
+                            <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-primary me-1">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </td> *@
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const filas = document.querySelectorAll("#tablaPacientes tbody tr[data-href]");
+      filas.forEach(fila => {
+        fila.addEventListener("click", () => {
+          window.location.href = fila.getAttribute("data-href");
+        });
+
+        // Opcional: accesibilidad con teclado
+        fila.setAttribute("tabindex", "0");
+        fila.addEventListener("keypress", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            window.location.href = fila.getAttribute("data-href");
+          }
+        });
+
+      });
+    });
+</script>

@@ -1,5 +1,4 @@
-using SaluFitApp.Web.Services.Interfaces;
-using SaluFitApp.Web.Services.Implementations.Mocks;
+using SaluFitApp.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,15 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // <-- Aquí registras mocks en lugar de DbContext -->
-builder.Services.AddSingleton<IPatientService, FakePatientService>();
-builder.Services.AddSingleton<IAppointmentService, FakeAppointmentService>();
+builder.Services.AddSingleton<FakePacienteService, FakePacienteService>();
+builder.Services.AddSingleton<FakeCitaService, FakeCitaService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Dashboard/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -29,7 +28,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Dashboard}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

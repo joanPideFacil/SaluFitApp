@@ -1,11 +1,10 @@
 ﻿using SaluFitApp.Web.Domain.Entities;
-using SaluFitApp.Web.Services.Interfaces;
 
-public class FakePatientService : IPatientService
+public class FakePacienteService 
 {
     private readonly List<Patient> _store;
 
-    public FakePatientService()
+    public FakePacienteService()
     {
         _store = new List<Patient>
         {

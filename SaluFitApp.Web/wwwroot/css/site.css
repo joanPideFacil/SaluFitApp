@@ -1,31 +1,125 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+}
+
+
+:root {
+    --gris-1: #F2F2F2; /* gris claro con opacidad */
+    --gris-1-hover: #E6E6E6CC;
+    --verde-boton-anadir: #0F4F60BB;
+    --verde-boton-anadir-hover: #0c3f4d;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+    color: var(--bs-secondary-color);
+    text-align: end;
 }
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    text-align: start;
+}
+
+aside svg {
+    width: 1.3rem;
+    height: auto;
+    flex-shrink: 0;
+    margin-right: 1rem;
+}
+
+#tablaPacientes {
+    border: 1px solid #ADADAD;
+    border-radius: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    padding: 5px;
+}
+
+    #tablaPacientes td, th {
+        border-style: unset;
+    }
+
+    #tablaPacientes td {
+        border-top: 1px solid #ADADAD;
+    }
+
+.bg-gris{
+    background-color: var( --gris-1);
+}
+
+    .form-control:focus {
+    box-shadow:none;
+     border-color:var(--gris-1-hover);
+    }
+
+.input-group {
+    overflow: hidden;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.input-buscar {
+    border: none !important;
+    background-color: var( --gris-1);
+    flex: 1 1 auto;
+    min-width: 0;
+}
+    .input-buscar:focus-visible {
+        outline: none;
+    }
+
+.filtro-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.filtro-select {
+    padding: 0.5rem 1.rem;
+    background-color: var(--gris-1, #f2f2f2cc);
+    border: none;
+    border-radius: 2rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    max-width: fit-content; /* o una medida fija pequeña si prefieres */
+    text-align: left;
+}
+
+
+    .filtro-select:focus-visible {
+        border-color: none;
+        
+    }
+
+    .filtro-select:hover {
+        background-color: var(--gris-1-hover, #e6e6e6cc);
+    }
+
+.btn-Anadir {
+    background-color: var(--verde-boton-anadir);
+    color: white;
+}
+.btn-Anadir:hover {
+    color:white;
+    background-color: var(--verde-boton-anadir-hover);
 }

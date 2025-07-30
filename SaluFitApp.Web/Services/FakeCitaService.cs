@@ -1,12 +1,11 @@
 ﻿using SaluFitApp.Web.Domain.Entities;
-using SaluFitApp.Web.Services.Interfaces;
 
-namespace SaluFitApp.Web.Services.Implementations.Mocks;
-public class FakeAppointmentService : IAppointmentService
+namespace SaluFitApp.Web.Services;
+public class FakeCitaService 
 {
     private readonly List<Appointment> _store;
 
-    public FakeAppointmentService()
+    public FakeCitaService()
     {
         _store = new List<Appointment>
         {

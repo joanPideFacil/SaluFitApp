@@ -3,15 +3,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SaluFitApp.Web.Domain;
 using SaluFitApp.Web.Domain.Entities;
-using SaluFitApp.Web.Services.Interfaces;
 
 namespace SaluFitApp.Web.Controllers
 {
-    public class PatientsController : Controller
+    public class EjercicioController : Controller
     {
-        private readonly IPatientService _patientService;
+        private readonly FakePacienteService _patientService;
 
-        public PatientsController(IPatientService patientService)
+        public EjercicioController(FakePacienteService patientService)
             => _patientService = patientService;
 
         // GET: /Patients
