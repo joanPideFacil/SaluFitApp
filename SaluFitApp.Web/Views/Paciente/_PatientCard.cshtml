@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@model PacienteModel
+
+<div class="row my-3">
+    <!-- Información personal -->
+    <div class="col-md-6">
+        <div class="card rounded-4 border-0" style="background: #F7F5F4;">
+            <div class="card-body">
+                <h5 class="card-title mb-3" style="font-weight:500;">Información personal</h5>
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-muted" style="font-size: 0.9rem;">Nombre completo</dt>
+                    <dd class="col-sm-8" style="margin-bottom:1em;">@Model.Nombre</dd>
+
+                    <dt class="col-sm-4 text-muted" style="font-size: 0.9rem;">Fecha de nacimiento</dt>
+                    <dd class="col-sm-8" style="margin-bottom:1em;">
+                        @Model.FechaNacimiento.ToString("dd 'de' MMMM 'de' yyyy", CultureInfo.GetCultureInfo("es-ES"))
+                    </dd>
+
+                    <dt class="col-sm-4 text-muted" style="font-size: 0.9rem;">Género</dt>
+                    <dd class="col-sm-8" style="margin-bottom:1em;">@Model.Genero</dd>
+
+                    <dt class="col-sm-4 text-muted" style="font-size: 0.9rem;">Teléfono</dt>
+                    <dd class="col-sm-8" style="margin-bottom:1em;">@Model.Telefono</dd>
+
+                    <dt class="col-sm-4 text-muted" style="font-size: 0.9rem;">Correo electrónico</dt>
+                    <dd class="col-sm-8" style="margin-bottom:1em;">@Model.Email</dd>
+
+                    <dt class="col-sm-4 text-muted" style="margin-bottom:1em; font-size: 0.9rem;">Dirección</dt>
+                    <dd class="col-sm-8" style="margin-bottom:1em;">@Model.Direccion</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notas -->
+    <div class="col-md-6">
+        <div class="card rounded-4 border-0" style="background: #F7F5F4;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title mb-0" style="font-weight:500;">Notas</h5>
+                    <a asp-action="AddNote" asp-route-patientId="@Model.Id" class="btn btn-Anadir rounded-5">Nueva nota</a>
+                </div>
+                <ul class="list-unstyled mb-0">
+                    @foreach (var note in Model.Notas)
+                    {
+                        <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                            <span>@note.Titulo</span>
+                            <small class="text-muted">
+                                @note.Fecha.ToString("dd 'de' MMMM 'de' yyyy", CultureInfo.GetCultureInfo("es-ES"))
+                            </small>
+                        </li>
+                    }
+                    @if (!Model.Notas.Any())
+                    {
+                        <li class="text-muted">Sin notas aún.</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

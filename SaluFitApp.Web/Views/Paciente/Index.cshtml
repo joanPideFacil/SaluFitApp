@@ -1,14 +1,14 @@
-﻿@model IEnumerable<SaluFitApp.Web.Domain.Entities.Patient>
+﻿@model IEnumerable<PacienteModel>
 
 @{
     ViewData["Title"] = "Paciente";
     // var searchTerm = HttpContext.Request.Query["search"].ToString();
 }
 
-<div class="container py-4">
+<div class="container ms-5 py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Pacientes</h1>
-        <a asp-action="Create" class="btn btn-Anadir rounded-5 ">Nuevo paciente +</a>
+        <a asp-action="Create" class="btn btn-Anadir rounded-5">Nuevo paciente +</a>
     </div>
 
     <div class="mb-4 ">
@@ -21,7 +21,7 @@
             <input type="text" name="search" class="input-buscar" placeholder="Buscar paciente" />
         </div>
     </div>
-  
+
     <div class="filtro-container">
         <select class="filtro-select form-select text-center">
             <option  selected>Estado</option>
@@ -45,34 +45,34 @@
 
 
     <table id="tablaPacientes" class="table table-hover align-middle">
-            <thead>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Foto</th>
+                <th>Última cita</th>
+                <th>Razón consulta</th>
+                <th>Ejercicios</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
                 <tr>
-                    <th>Nombre</th>
-                    <th>Foto</th>
-                    <th>Última cita</th>
-                    <th>Razón consulta</th>
-                    <th>Ejercicios</th>
-                    <th>Estado</th>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        No se han encontrado pacientes.
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @if (!Model.Any())
+            }
+            else
+            {
+                foreach (var p in Model)
                 {
-                    <tr>
-                        <td colspan="6" class="text-center text-muted py-4">
-                            No se han encontrado pacientes.
-                        </td>
-                    </tr>
-                }
-                else
-                {
-                    foreach (var p in Model)
-                    {
                     <tr data-href="@Url.Action("Edit", new { id = p.Id })"
                         style="cursor: pointer;">
                             <td >@p.Nombre</td>
                         <td><img width="40" height="40" class="rounded-5" src="~/img/imagen-ejemplo.jpg" /></td>
-                            <td>@p.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                            <td>@p.FechaNacimiento.ToString("yyyy-MM-dd")</td>
                             <td>Mucho dolor perianal</td>
                             <td>3 Ejercicios</td>
                             <td>Rotura</td>
@@ -80,7 +80,7 @@
                             <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-primary me-1">Editar</a>
                             <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
                         </td> *@
-                        </tr>
+                    </tr>
                     }
                 }
             </tbody>

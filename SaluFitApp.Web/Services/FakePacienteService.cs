@@ -1,41 +1,79 @@
-﻿using SaluFitApp.Web.Domain.Entities;
+﻿using SaluFitApp.Web.Models;
 
 public class FakePacienteService 
 {
-    private readonly List<Patient> _store;
+    private readonly List<PacienteModel> _store;
 
     public FakePacienteService()
     {
-        _store = new List<Patient>
+        _store = new List<PacienteModel>
         {
-            new Patient {
+            new PacienteModel {
                 Id = Guid.NewGuid(),
                 Nombre = "José Rodríguez",
-                DateOfBirth = new DateTime(1980, 5, 10),
-                Phone = 666666661,
+                FechaNacimiento = new DateTime(1980, 12, 10),
+                Genero = "Hombre",
+                Telefono = 666666661,
                 Email = "jose.rodriguez@example.com",
-                Address = "Calle Falsa 123"
+                Direccion = "Calle Falsa 123",
+                Notas = new List<Nota>{
+                    new Nota
+                    {
+                        Id = 1,
+                        Titulo = "Desgarro abismal",
+                        Contenido = "Descomuanalmente destrozado",
+                        Fecha = new DateTime(2025, 07, 01)
+                    }
+                },
+                Citas = new List<CitaModel>{
+                    new CitaModel
+                    {
+                        Nombre = "Dolor perianal",
+                        Departamento = "Desgarro abismal",
+                        Descripcion = "Descomuanalmente destrozado",
+                        FechaCita = new DateTime(2025, 07, 01)
+                    }
+                },
+                Ejercicios = new List<EjercicioModel>{
+                    new EjercicioModel
+                    {
+                        Id = 1,
+                        Nombre = "Masaje perianal",
+                        Descripcion = "Perforación profunda",
+                        Repeticiones = "3 repeticiones profundas al fallo"
+                    }
+                },
+                Documentos = new List<DocumentoModel>{
+                    new DocumentoModel
+                    {
+                        Nombre = "Fotos rotura",
+                        DescripcionCorta = "Descomuanalmente destrozado",
+                        FechaSubida = new DateTime(2025, 07, 01)
+                    }
+                }
             },
-            new Patient {
+            new PacienteModel {
                 Id = Guid.NewGuid(),
                 Nombre = "Alberto García",
-                DateOfBirth = new DateTime(1985, 7, 12),
-                Phone = 666666662,
+                FechaNacimiento = new DateTime(1985, 7, 12),
+                Genero = "Hombre",
+                Telefono = 666666662,
                 Email = "alberto.García@example.com",
-                Address = "Calle Falsa2 22"
+                Direccion = "Calle Falsa2 22"
             },
-            new Patient {
+            new PacienteModel {
                 Id = Guid.NewGuid(),
                 Nombre = "Raúl Martínez",
-                DateOfBirth = new DateTime(1990, 9, 1),
-                Phone = 666666663,
+                FechaNacimiento = new DateTime(1990, 9, 1),
+                Genero = "Hombre",
+                Telefono = 666666663,
                 Email = "raul.martinez@example.com",
-                Address = "Calle Fals3 52"
+                Direccion = "Calle Fals3 52"
             }
         };
     }
 
-    public Task<Patient> CreateAsync(Patient dto)
+    public Task<PacienteModel> CreateAsync(PacienteModel dto)
     {
         dto.Id = Guid.NewGuid();
         _store.Add(dto);
@@ -48,10 +86,10 @@ public class FakePacienteService
         return Task.CompletedTask;
     }
 
-    public Task<Patient?> GetByIdAsync(Guid id)
+    public Task<PacienteModel?> GetByIdAsync(Guid id)
         => Task.FromResult(_store.FirstOrDefault(x => x.Id == id));
 
-    public Task<IEnumerable<Patient>> SearchAsync(string? term)
+    public Task<IEnumerable<PacienteModel>> SearchAsync(string? term)
     {
         var q = _store.AsEnumerable();
         if (!string.IsNullOrWhiteSpace(term))
@@ -59,7 +97,7 @@ public class FakePacienteService
         return Task.FromResult(q);
     }
 
-    public Task UpdateAsync(Patient dto)
+    public Task UpdateAsync(PacienteModel dto)
     {
         var idx = _store.FindIndex(x => x.Id == dto.Id);
         if (idx >= 0) _store[idx] = dto;

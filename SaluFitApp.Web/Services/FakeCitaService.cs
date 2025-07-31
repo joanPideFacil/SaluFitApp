@@ -1,15 +1,15 @@
-﻿using SaluFitApp.Web.Domain.Entities;
+﻿using SaluFitApp.Web.Models;
 
 namespace SaluFitApp.Web.Services;
 public class FakeCitaService 
 {
-    private readonly List<Appointment> _store;
+    private readonly List<CitaModel> _store;
 
     public FakeCitaService()
     {
-        _store = new List<Appointment>
+        _store = new List<CitaModel>
         {
-            new Appointment
+            new CitaModel
             {
                 Id = Guid.NewGuid(),
                 FKCliente = 2,
@@ -19,7 +19,7 @@ public class FakeCitaService
                 FechaCita      = DateTime.Today.AddHours(10),
                 Estado = "Activa"
             },
-            new Appointment
+            new CitaModel
             {
                 Id = Guid.NewGuid(),
                 FKCliente = 1,
@@ -32,14 +32,14 @@ public class FakeCitaService
         };
     }
 
-    public Task<Appointment> CreateAsync(Appointment dto)
+    public Task<CitaModel> CreateAsync(CitaModel dto)
     {
         dto.Id = Guid.NewGuid();
         _store.Add(dto);
         return Task.FromResult(dto);
     }
 
-    public Task<IEnumerable<Appointment>> GetUpcomingAsync(int daysAhead)
+    public Task<IEnumerable<CitaModel>> GetUpcomingAsync(int daysAhead)
     {
         var now = DateTime.Now;
         var cutoff = now.AddDays(daysAhead);

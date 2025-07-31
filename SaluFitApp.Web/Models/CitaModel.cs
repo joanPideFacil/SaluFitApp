@@ -1,8 +1,10 @@
-﻿namespace SaluFitApp.Web.Domain.Entities
+﻿namespace SaluFitApp.Web.Models
 {
-    public class Appointment
+    public class CitaModel
+
     {
         public Guid Id { get; set; }
+        public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Departamento { get; set; }
         public DateTime FechaCita { get; set; }
