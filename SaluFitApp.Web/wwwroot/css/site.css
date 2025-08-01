@@ -42,12 +42,15 @@ body {
     border-radius: 1rem;
 }
 
-dl dt {
+dl dt{
     font-weight: 500;
 }
 
 dl dd {
     margin-left: 0;
+}
+dd {
+    margin-top: .5rem;
 }
 
 .card-title {
@@ -169,4 +172,54 @@ aside svg {
 .btn-Anadir:hover {
     color:white;
     background-color: var(--verde-boton-anadir-hover);
+}
+
+
+/* Contenedor de la lista */
+.contenedor-detalles-paciente {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: inherit;
+}
+
+
+.linea-paciente {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.5rem;
+    border-bottom: 1px solid #A7A7A7;
+}
+
+    .linea-paciente.first {
+        border-top: 1px solid #A7A7A7;
+    }
+
+.titulo-linea {
+    margin-right: 4rem;
+    font-size: 0.9rem;
+    color: #9A9A9A;
+}
+
+.datos-linea {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 576px) {
+    .linea-paciente {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .titulo-linea {
+        margin-right: 0;
+        margin-bottom: 0.25rem;
+        width: 100%;
+    }
+
+    .datos-linea {
+        width: 100%;
+    }
 }

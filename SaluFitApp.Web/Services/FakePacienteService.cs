@@ -16,8 +16,8 @@ public class FakePacienteService
                 Telefono = 666666661,
                 Email = "jose.rodriguez@example.com",
                 Direccion = "Calle Falsa 123",
-                Notas = new List<Nota>{
-                    new Nota
+                Notas = new List<NotaModel>{
+                    new NotaModel
                     {
                         Id = 1,
                         Titulo = "Desgarro abismal",

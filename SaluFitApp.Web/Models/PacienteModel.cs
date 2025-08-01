@@ -12,17 +12,10 @@ namespace SaluFitApp.Web.Models
         public int Telefono { get; set; }
         public string Email { get; set; } = null!;
         public string Direccion { get; set; } = null!;
-        public List<Nota> Notas { get; set; } = new();
+        public List<NotaModel> Notas { get; set; } = new();
         public List<CitaModel> Citas { get; set; } = new();
         public List<EjercicioModel> Ejercicios { get; set; } = new();
         public List<DocumentoModel> Documentos { get; set; } = new();
 
-    }
-    public class Nota
-    {
-        public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Contenido { get; set; }
-        public DateTime Fecha { get; set; }
     }
 }

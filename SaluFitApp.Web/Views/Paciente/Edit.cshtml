@@ -4,8 +4,6 @@
 
 @{
     ViewData["Title"] = "Detalles del paciente";
-    var section = (Context.Request.Query["section"].FirstOrDefault() ?? "General");
-    string Active(string name) => string.Equals(section, name, StringComparison.OrdinalIgnoreCase) ? "active" : "";
 }
 
 <div class="container ms-5 py-4">
@@ -57,9 +55,8 @@
     <div class="tab-content pt-5" id="tab-content">
         <div class="tab-pane active" id="simple-tabpanel-0" role="tabpanel" aria-labelledby="general">
             <form asp-action="Edit" method="post">
-                @* incluir el Id oculto para que MVC lo reciba *@
                 <input type="hidden" asp-for="Id" />
-                @await Html.PartialAsync("_PatientCard", Model)
+                @await Html.PartialAsync("_PatientDetail", Model)
             </form>
         </div>
         <div class="tab-pane" id="simple-tabpanel-1" role="tabpanel" aria-labelledby="citas">
@@ -102,48 +99,62 @@
         <div class="tab-pane" id="simple-tabpanel-2" role="tabpanel" aria-labelledby="Ejercicios">
             <div class="mt-3 p-4" style="background: #F7F5F4; border-radius:16px;">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 style="font-weight:500;">Ejercicios</h5>
+                    <h5 style="font-weight:500; margin:0;">Ejercicios</h5>
                     <a asp-action="AssignEjercicio" asp-route-patientId="@Model.Id" class="btn btn-sm btn-Anadir rounded-5">Asignar ejercicio</a>
                 </div>
-                <table class="table border-top-0 mb-0">
-                    <thead>
-                        <tr>
-                            <th>Orden</th>
-                            <th>Ejercicio</th>
-                            <th>Repeticiones</th>
-                            <th>L M X J V S D</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int i = 0; i < (Model.Ejercicios?.Count ?? 0); i++)
-                        {
-                            var ej = Model.Ejercicios[i];
-                            <tr class="border-bottom">
-                                <td>@(i + 1)</td>
-                                <td>@ej.Nombre</td>
-                                <td>@ej.Repeticiones</td>
-                                <td>
-                                    <div class="d-flex gap-1">
-                                        @* suposición de días como checkboxes *@
-                                        @foreach (var dia in new[] { "L", "M", "X", "J", "V", "S", "D" })
-                                        {
-                                            <div class="form-check" style="font-size:0;">
-                                                <input class="form-check-input" type="checkbox" disabled />
-                                            </div>
-                                        }
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                        @if (Model.Ejercicios == null || !Model.Ejercicios.Any())
-                        {
-                            <tr>
-                                <td colspan="4" class="text-muted">Sin ejercicios asignados.</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+
+                <div class="card" style="background: #ffffff; border-radius:12px; border: none;">
+                    <div class="table-responsive">
+                        <table class="table mb-0 align-middle">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">Orden</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">Ejercicio</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">Repeticiones</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">L</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">M</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">X</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">J</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">V</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">S</th>
+                                    <th style="font-weight:600; border-top:0; border-bottom:1px solid #CFCFCF;">D</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Ejercicios != null && Model.Ejercicios.Any())
+                                {
+                                    @for (int i = 0; i < Model.Ejercicios.Count; i++)
+                                    {
+                                        var ej = Model.Ejercicios[i];
+                                        <tr style="border-bottom:1px solid #CFCFCF;">
+                                            <td>@(i + 1)</td>
+                                            <td>@ej.Nombre</td>
+                                            <td>@ej.Repeticiones</td>
+                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    @foreach (var dia in new[] { "L", "M", "X", "J", "V", "S", "D" })
+                                                    {
+                                                        <div style="width:16px; height:16px; border:1px solid #999; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:10px; color: transparent;">
+                                                            @* placeholder, se puede rellenar si está marcado *@
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-muted">Sin ejercicios asignados.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <div class="tab-pane" id="simple-tabpanel-3" role="tabpanel" aria-labelledby="Documentos">
