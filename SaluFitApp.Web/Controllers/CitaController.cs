@@ -38,7 +38,7 @@ namespace SaluFitApp.Web.Controllers
         }
 
         // GET: /Patients/Edit/{id}
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(int id)
         {
             var paciente = await _pacienteService.GetByIdAsync(id);
             if (paciente == null)
@@ -60,7 +60,7 @@ namespace SaluFitApp.Web.Controllers
         }
 
         // GET: /Patients/Delete/{id}
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _pacienteService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));

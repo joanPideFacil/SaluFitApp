@@ -5,7 +5,7 @@ namespace SaluFitApp.Web.Models
 {
     public class PacienteModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; } = null!;
         public DateTime FechaNacimiento { get; set; }
         public string Genero { get; set; }

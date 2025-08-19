@@ -18,9 +18,15 @@ public class FakeNotaService
         };
     }
 
+    public Task<IEnumerable<NotaModel>> GetByPacienteAsync(int pacienteId)
+    {
+        var notas = _store.Where(n => n.FKPaciente == pacienteId);
+        return Task.FromResult(notas.AsEnumerable());
+    }
+
     public Task<NotaModel> CreateAsync(NotaModel dto)
     {
-        dto.Id = 2;
+        dto.Id = _store.Count + 1;
         _store.Add(dto);
         return Task.FromResult(dto);
     }

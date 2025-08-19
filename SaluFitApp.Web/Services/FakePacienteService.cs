@@ -9,7 +9,7 @@ public class FakePacienteService
         _store = new List<PacienteModel>
         {
             new PacienteModel {
-                Id = Guid.NewGuid(),
+                Id = 1,
                 Nombre = "José Rodríguez",
                 FechaNacimiento = new DateTime(1980, 12, 10),
                 Genero = "Hombre",
@@ -53,7 +53,7 @@ public class FakePacienteService
                 }
             },
             new PacienteModel {
-                Id = Guid.NewGuid(),
+                Id = 2,
                 Nombre = "Alberto García",
                 FechaNacimiento = new DateTime(1985, 7, 12),
                 Genero = "Hombre",
@@ -62,7 +62,7 @@ public class FakePacienteService
                 Direccion = "Calle Falsa2 22"
             },
             new PacienteModel {
-                Id = Guid.NewGuid(),
+                Id = 3,
                 Nombre = "Raúl Martínez",
                 FechaNacimiento = new DateTime(1990, 9, 1),
                 Genero = "Hombre",
@@ -75,18 +75,18 @@ public class FakePacienteService
 
     public Task<PacienteModel> CreateAsync(PacienteModel dto)
     {
-        dto.Id = Guid.NewGuid();
+        dto.Id = 4;
         _store.Add(dto);
         return Task.FromResult(dto);
     }
 
-    public Task DeleteAsync(Guid id)
+    public Task DeleteAsync(int id)
     {
         _store.RemoveAll(x => x.Id == id);
         return Task.CompletedTask;
     }
 
-    public Task<PacienteModel?> GetByIdAsync(Guid id)
+    public Task<PacienteModel?> GetByIdAsync(int id)
         => Task.FromResult(_store.FirstOrDefault(x => x.Id == id));
 
     public Task<IEnumerable<PacienteModel>> SearchAsync(string? term)

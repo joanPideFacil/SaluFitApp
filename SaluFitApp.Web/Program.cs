@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 // <-- Aquí registras mocks en lugar de DbContext -->
 builder.Services.AddSingleton<FakePacienteService, FakePacienteService>();
 builder.Services.AddSingleton<FakeCitaService, FakeCitaService>();
+builder.Services.AddScoped<FakeNotaService>(); //Según ChatGPT es Scoped porqué con Singleton hay peligro de que las instancias se compartan entre ususarios y unos vean los datos de los otros
 
 var app = builder.Build();
 
