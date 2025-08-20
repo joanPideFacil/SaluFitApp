@@ -113,13 +113,17 @@ aside svg {
     }
 
 .bg-gris{
-    background-color: var( --gris-1);
+    background-color: var(--gris-1);
 }
 
     .form-control:focus {
     box-shadow:none;
      border-color:var(--gris-1-hover);
     }
+
+.bg-gris-oscuro {
+    background-color: var(--gris-1-hover) !important;
+}
 
 .input-group {
     overflow: hidden;
